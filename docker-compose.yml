@@ -1,0 +1,24 @@
+services:
+  # ——— 示例：yunqing 的 github-trending ———
+  yunqing-github-trending:
+    build:
+      context: .
+      args:
+        OWNER: yunqing
+        PROJECT: github-trending
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    restart: "no"
+
+  # ——— 添加更多爬虫服务 ———
+  # zhangsan-douyin-video:
+  #   build:
+  #     context: .
+  #     args:
+  #       OWNER: zhangsan
+  #       PROJECT: douyin-video
+  #   env_file: .env
+  #   volumes:
+  #     - ./data:/app/data
+  #   restart: unless-stopped

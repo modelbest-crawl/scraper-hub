@@ -1,0 +1,10 @@
+# 全局调度配置
+# 各项目的 cron 在自己的 config.yaml 中定义，这里做汇总和全局调度参数
+
+timezone: "Asia/Shanghai"
+
+global:
+  max_concurrent_scrapers: 5
+  retry_failed_after_minutes: 30
+
+# 可以用 crontab / APScheduler / Airflow 等工具读取各项目的 config.yaml 来调度

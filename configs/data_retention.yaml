@@ -1,0 +1,13 @@
+# 数据生命周期配置
+
+default:
+  hot_days: 7           # 本地热存储保留天数
+  warm_days: 90          # 数据库/温存储保留天数
+  archive: true          # 超期后是否归档（否则删除）
+
+overrides:
+  # yunqing/github-trending:
+  #   warm_days: 365
+  # lisi/taobao-product:
+  #   warm_days: 30
+  #   archive: false

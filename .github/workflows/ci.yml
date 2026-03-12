@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  pull_request:
+    paths:
+      - 'projects/**'
+      - 'packages/**'
+  push:
+    branches: [main, develop]
+    paths:
+      - 'projects/**'
+      - 'packages/**'
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.changes.outputs.packages }}
+      yunqing: ${{ steps.changes.outputs.yunqing }}
+      zhangsan: ${{ steps.changes.outputs.zhangsan }}
+      lisi: ${{ steps.changes.outputs.lisi }}
+      wangwu: ${{ steps.changes.outputs.wangwu }}
+      zhaoliu: ${{ steps.changes.outputs.zhaoliu }}
+      qianqi: ${{ steps.changes.outputs.qianqi }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            packages:
+              - 'packages/**'
+            yunqing:
+              - 'projects/yunqing/**'
+            zhangsan:
+              - 'projects/zhangsan/**'
+            lisi:
+              - 'projects/lisi/**'
+            wangwu:
+              - 'projects/wangwu/**'
+            zhaoliu:
+              - 'projects/zhaoliu/**'
+            qianqi:
+              - 'projects/qianqi/**'
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install ruff
+      - run: ruff check packages/ projects/
+
+  test:
+    needs: detect-changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -e .
+          pip install -r requirements-base.txt
+
+      - name: Test packages (if changed)
+        if: needs.detect-changes.outputs.packages == 'true'
+        run: pytest packages/ --tb=short -q
+
+      - name: Test all projects (if packages changed)
+        if: needs.detect-changes.outputs.packages == 'true'
+        run: pytest projects/ -m "not smoke" --tb=short -q
+
+      - name: Test yunqing projects
+        if: needs.detect-changes.outputs.yunqing == 'true' && needs.detect-changes.outputs.packages != 'true'
+        run: pytest projects/yunqing/ -m "not smoke" --tb=short -q
+
+      - name: Test zhangsan projects
+        if: needs.detect-changes.outputs.zhangsan == 'true' && needs.detect-changes.outputs.packages != 'true'
+        run: pytest projects/zhangsan/ -m "not smoke" --tb=short -q
+
+      - name: Test lisi projects
+        if: needs.detect-changes.outputs.lisi == 'true' && needs.detect-changes.outputs.packages != 'true'
+        run: pytest projects/lisi/ -m "not smoke" --tb=short -q
+
+      - name: Test wangwu projects
+        if: needs.detect-changes.outputs.wangwu == 'true' && needs.detect-changes.outputs.packages != 'true'
+        run: pytest projects/wangwu/ -m "not smoke" --tb=short -q
+
+      - name: Test zhaoliu projects
+        if: needs.detect-changes.outputs.zhaoliu == 'true' && needs.detect-changes.outputs.packages != 'true'
+        run: pytest projects/zhaoliu/ -m "not smoke" --tb=short -q
+
+      - name: Test qianqi projects
+        if: needs.detect-changes.outputs.qianqi == 'true' && needs.detect-changes.outputs.packages != 'true'
+        run: pytest projects/qianqi/ -m "not smoke" --tb=short -q
+
+  smoke:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          pip install -e .
+          pip install -r requirements-base.txt
+      - run: pytest projects/ -m smoke --tb=short -q

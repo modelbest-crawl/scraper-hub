@@ -1,0 +1,44 @@
+# 敏感信息
+.env
+.env.*
+!.env.example
+**/config.local.yaml
+**/credentials/
+**/cookies/
+
+# 数据产出
+**/data/
+**/output/
+**/captured/
+**/downloads/
+*.db
+*.sqlite
+*.csv
+*.xlsx
+
+# 日志
+logs/
+*.log
+
+# Python
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.egg-info/
+scraper_hub.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

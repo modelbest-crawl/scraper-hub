@@ -1,0 +1,15 @@
+# 代理配置
+# 敏感的代理账号密码请放在 .env 中，这里只放公共配置
+
+provider: "env"   # env: 从环境变量读取 / file: 从下方列表读取
+
+# 如果 provider 为 file，在此列出代理
+proxies: []
+  # - "http://proxy1:8080"
+  # - "http://proxy2:8080"
+
+# 代理池配置
+pool:
+  rotate_interval: 60     # 秒，多久轮换一次
+  max_failures: 3         # 连续失败几次后剔除
+  health_check_url: "https://httpbin.org/ip"

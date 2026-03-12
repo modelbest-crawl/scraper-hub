@@ -1,0 +1,18 @@
+# 公共库：只有 Lead 能合并
+packages/                     @lead-id
+
+# 每人的目录：通配符一劳永逸
+projects/yunqing/**           @lead-id
+projects/zhangsan/**          @zhangsan-id        @lead-id
+projects/lisi/**              @lisi-id            @lead-id
+projects/wangwu/**            @wangwu-id          @lead-id
+projects/zhaoliu/**           @zhaoliu-id         @lead-id
+projects/qianqi/**            @qianqi-id          @lead-id
+
+# 基础设施：仅 Lead
+.github/**                    @lead-id
+scripts/**                    @lead-id
+configs/**                    @lead-id
+
+# 文档：所有人可贡献
+docs/**                       @lead-id

@@ -1,0 +1,35 @@
+project:
+  name: "github-trending"
+  owner: "yunqing"
+  description: "抓取 GitHub Trending 榜单，按语言/时间维度归档"
+
+target:
+  base_url: "https://github.com/trending"
+  languages: ["python", "javascript", "go", "rust", "typescript"]
+  since: "daily"
+
+request:
+  rate_limit: 1.0
+  timeout: 15
+  proxy: false
+  max_retries: 3
+
+storage:
+  type: "json"
+  output_dir: "./data/yunqing/github-trending"
+
+schedule:
+  cron: "0 8 * * *"
+  timezone: "Asia/Shanghai"
+
+notify:
+  on_success: false
+  on_failure: true
+  channel: "dingtalk"
+
+compliance:
+  robots_txt_checked: true
+  rate_limit: 1.0
+  data_usage: "internal"
+  personal_data: false
+  notes: "仅采集公开 Trending 页面数据"
