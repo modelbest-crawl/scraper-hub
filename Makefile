@@ -20,6 +20,14 @@ run:
 new-project:
 	@bash scripts/new_project.sh $(owner) $(name)
 
+# ——— 团队管理 ———
+
+add-member:
+	@bash scripts/add_member.sh $(name) $(github)
+
+offboard-member:
+	@bash scripts/offboard_member.sh $(name)
+
 # ——— 测试 ———
 
 test:

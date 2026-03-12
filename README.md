@@ -1,6 +1,6 @@
 # scraper-hub
 
-爬虫团队 Monorepo —— 6 人团队，每人多个独立项目，共享公共基础设施。
+爬虫团队 Monorepo —— 弹性团队，每人多个独立项目，共享公共基础设施。
 
 ## 目录结构
 
@@ -8,13 +8,9 @@
 scraper-hub/
 ├── packages/          公共库（HTTP 客户端、代理池、反反爬、存储、通知、工具）
 ├── projects/          按成员分目录，每人管理自己的所有爬虫项目
-│   ├── yunqing/
-│   ├── zhangsan/
-│   ├── lisi/
-│   ├── wangwu/
-│   ├── zhaoliu/
-│   ├── qianqi/
-│   └── _template/     新项目模板
+│   ├── yunqing/       Lead 目录
+│   ├── _template/     新项目模板
+│   └── ...            （新成员由 make add-member 自动创建）
 ├── scripts/           运维脚本
 ├── configs/           全局配置
 └── docs/              团队文档
@@ -55,6 +51,8 @@ make test-project owner=你的名字 name=项目名
 |------|------|
 | `make install` | 安装全局依赖 |
 | `make new-project owner=xxx name=yyy` | 创建新项目 |
+| `make add-member name=xxx github=yyy` | 新成员入职 |
+| `make offboard-member name=xxx` | 成员离职（保留代码，收回权限） |
 | `make run owner=xxx name=yyy` | 运行指定项目 |
 | `make test` | 全量测试 |
 | `make test-owner owner=xxx` | 测试某人所有项目 |

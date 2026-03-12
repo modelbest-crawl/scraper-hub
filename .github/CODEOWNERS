@@ -1,13 +1,8 @@
 # 公共库：只有 Lead 能合并
 packages/                     @yqy5568
 
-# 每人的目录：通配符一劳永逸
+# 成员目录（入职时由 make add-member 自动追加）
 projects/yunqing/**           @yqy5568
-projects/zhangsan/**          @zhangsan-id        @yqy5568
-projects/lisi/**              @lisi-id            @yqy5568
-projects/wangwu/**            @wangwu-id          @yqy5568
-projects/zhaoliu/**           @zhaoliu-id         @yqy5568
-projects/qianqi/**            @qianqi-id          @yqy5568
 
 # 基础设施：仅 Lead
 .github/**                    @yqy5568

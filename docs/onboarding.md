@@ -89,3 +89,29 @@ git push -u origin HEAD
 - `config.yaml` 中必须填好 `rate_limit` 和 `compliance`
 - 敏感信息（token/cookie/密码）绝不提交到 Git
 - 每次 commit 遵循规范：`feat(你的名字/项目名): 描述`
+
+## 离职交接流程
+
+### Lead 操作
+
+```bash
+# 1. 运行离职脚本（收回权限，保留代码）
+make offboard-member name=离职成员名
+
+# 2. 提交变更
+git add -A
+git commit -m "chore: offboard 成员名"
+git push
+```
+
+### 交接给其他人（可选）
+
+如果需要其他成员接手离职成员的项目：
+
+```bash
+# 方式 1（推荐）：项目留在原目录，只改 CODEOWNERS 中的负责人
+# 编辑 .github/CODEOWNERS，把 @离职成员ID 改成 @接手人ID
+
+# 方式 2：把项目移到接手人目录
+git mv projects/离职成员/项目名 projects/接手人/项目名
+```
