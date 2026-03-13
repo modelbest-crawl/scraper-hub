@@ -1,4 +1,4 @@
-.PHONY: install install-project run new-project test test-owner test-project test-packages test-smoke lint lint-owner registry
+.PHONY: install install-project run new-project test test-owner test-project test-packages test-smoke lint lint-owner format registry health add-member offboard-member
 
 # ——— 安装 ———
 
@@ -45,7 +45,7 @@ test-packages:
 test-smoke:
 	pytest projects/ -m smoke --tb=short -q
 
-# ——— Lint ———
+# ——— Lint & Format ———
 
 lint:
 	ruff check packages/ projects/
@@ -53,7 +53,13 @@ lint:
 lint-owner:
 	ruff check projects/$(owner)/
 
+format:
+	ruff format packages/ projects/
+
 # ——— 工具 ———
 
 registry:
 	python scripts/generate_registry.py
+
+health:
+	python scripts/check_health.py

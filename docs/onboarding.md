@@ -4,7 +4,7 @@
 
 - Python >= 3.10
 - Git
-- 申请 GitHub Organization 权限（找 Lead）
+- 申请 [modelbest-crawl](https://github.com/modelbest-crawl) GitHub Organization 权限（找 Lead）
 
 ## 2. Clone & 安装
 

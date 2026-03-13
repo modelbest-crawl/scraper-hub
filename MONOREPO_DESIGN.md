@@ -887,8 +887,7 @@ run:
 
 # 从模板创建新项目（零审批）
 new-project:
-	cp -r projects/_template projects/$(owner)/$(name)
-	@echo "项目 projects/$(owner)/$(name) 已创建"
+	@bash scripts/new_project.sh $(owner) $(name)
 
 # 新成员入职（Lead 执行）
 add-member:
@@ -920,17 +919,24 @@ test-packages:
 test-smoke:
 	pytest projects/ -m smoke --tb=short -q
 
-# ——— Lint ———
-
-lint-owner:
-	ruff check projects/$(owner)/
+# ——— Lint & Format ———
 
 lint:
 	ruff check packages/ projects/
 
-# 生成项目清单
+lint-owner:
+	ruff check projects/$(owner)/
+
+format:
+	ruff format packages/ projects/
+
+# ——— 工具 ———
+
 registry:
-	python scripts/generate_registry.py > docs/project_registry.md
+	python scripts/generate_registry.py
+
+health:
+	python scripts/check_health.py
 ```
 
 ---
@@ -1312,7 +1318,7 @@ overrides:
 
 ## 2. Clone & 安装（5 分钟）
 
-git clone git@github.com:your-org/scraper-hub.git
+git clone git@github.com:modelbest-crawl/scraper-hub.git
 cd scraper-hub
 python -m venv .venv
 source .venv/bin/activate

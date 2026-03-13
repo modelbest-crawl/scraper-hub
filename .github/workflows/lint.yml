@@ -2,8 +2,6 @@ name: Lint
 
 on:
   pull_request:
-  push:
-    branches: [main, develop]
 
 jobs:
   ruff:
@@ -13,3 +11,6 @@ jobs:
       - uses: astral-sh/ruff-action@v3
         with:
           args: "check packages/ projects/"
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: "format --check packages/ projects/"

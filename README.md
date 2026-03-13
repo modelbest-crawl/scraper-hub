@@ -1,5 +1,7 @@
 # scraper-hub
 
+[![CI](https://github.com/modelbest-crawl/scraper-hub/actions/workflows/ci.yml/badge.svg)](https://github.com/modelbest-crawl/scraper-hub/actions/workflows/ci.yml)
+
 爬虫团队 Monorepo —— 弹性团队，每人多个独立项目，共享公共基础设施。
 
 ## 目录结构
@@ -59,7 +61,9 @@ make test-project owner=你的名字 name=项目名
 | `make test-project owner=xxx name=yyy` | 测试指定项目 |
 | `make test-smoke` | 冒烟测试（真实请求） |
 | `make lint` | 代码检查 |
+| `make format` | 代码格式化 |
 | `make registry` | 生成项目清单 |
+| `make health` | 爬虫健康检查 |
 
 ## 文档
 
