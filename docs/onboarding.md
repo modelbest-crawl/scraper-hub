@@ -9,7 +9,7 @@
 ## 2. Clone & 安装
 
 ```bash
-git clone git@github.com:your-org/scraper-hub.git
+git clone git@github.com:modelbest/scraper-hub.git
 cd scraper-hub
 
 python -m venv .venv
